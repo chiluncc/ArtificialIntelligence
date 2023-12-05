@@ -45,6 +45,7 @@ class SimpleModel:
     
     def loadModel(self, fileName : str):
         self.model = torch.load(fileName + ".pth")
+        #训练模式
         self.model.train()
         self.optimizer = torch.optim.SGD(self.model.parameters(), lr=0.01) #梯度下降
         # self.model.eval()
