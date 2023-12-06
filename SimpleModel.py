@@ -4,15 +4,7 @@ import torchvision.io as io
 import torch.nn as nn
 
 class SimpleModel:
-    def __init__(self, *nums, numX : int, numY : int):
-        paramater = list()
-        for i in range(len(nums) - 2):
-            paramater.append(nn.Linear(nums[i], nums[i + 1]))
-            paramater.append(nn.ReLU())
-        paramater.append(nn.Linear(nums[-2], nums[-1]))
-        self.model = nn.Sequential(*paramater)
-        self.criterion = nn.CrossEntropyLoss()  #选择交叉熵损失函数，适用于分类问题
-        self.optimizer = torch.optim.SGD(self.model.parameters(), lr=0.01) #梯度下降
+    def __init__(self, *nums, numX : int = 0, numY : int = 0):
         self.preProcess = transforms.Compose([  #图片处理
             transforms.ToPILImage(),
             transforms.CenterCrop((numX, numY)),
@@ -20,6 +12,16 @@ class SimpleModel:
             transforms.Grayscale(num_output_channels=1),
             transforms.ToTensor()
         ])
+        self.criterion = nn.CrossEntropyLoss()  #选择交叉熵损失函数，适用于分类问题
+        if (len(nums) == 0):
+            return
+        paramater = list()
+        for i in range(len(nums) - 2):
+            paramater.append(nn.Linear(nums[i], nums[i + 1]))
+            paramater.append(nn.ReLU())
+        paramater.append(nn.Linear(nums[-2], nums[-1]))
+        self.model = nn.Sequential(*paramater)
+        self.optimizer = torch.optim.SGD(self.model.parameters(), lr=0.01) #梯度下降
 
     def train(self, dataX, dataY):
         self.optimizer.zero_grad()

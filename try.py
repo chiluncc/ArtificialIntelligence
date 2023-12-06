@@ -8,7 +8,7 @@ nums = [i for i in range(17)]
 names2nums = dict(zip(names, nums))
 nums2names = dict(zip(nums, names))
 
-totalFile = "Z_PIC"
+totalFile = "D:/VSCodeProject/Try/Z_PIC"
 fileList = os.listdir(totalFile)
 for Times in range(1000):
     for fileName in fileList:
