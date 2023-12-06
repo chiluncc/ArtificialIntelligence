@@ -17,7 +17,7 @@ for Times in range(1000):
                 break;
             dataX, dataY = model.readImage(f"{totalFile}/{fileName}/{pic}", names2nums[fileName])
             model.train(dataX, dataY)
-    print(f"--------------------------{Times}--------------------------")
+    print(f"--------------------------{Times}--------------------------") 
 
 # model.loadModel("Z_TEMP")
 tempList, tempIndex = model.use(model.readImageOnly(f"{totalFile}/10/vlcsnap-2020-02-05-23h22m36s885_outhand_7912318_2.png"))
